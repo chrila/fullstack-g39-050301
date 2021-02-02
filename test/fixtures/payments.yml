@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  total: 9.99
+  state: MyString
+  token: MyString
+  order: one
+  payable: one
+  payable_type: Payable
+
+two:
+  total: 9.99
+  state: MyString
+  token: MyString
+  order: two
+  payable: two
+  payable_type: Payable

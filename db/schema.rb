@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_02_003554) do
+ActiveRecord::Schema.define(version: 2021_02_02_221151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,24 @@ ActiveRecord::Schema.define(version: 2021_02_02_003554) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.decimal "total"
+    t.string "state"
+    t.string "token"
+    t.bigint "order_id", null: false
+    t.string "payable_type", null: false
+    t.bigint "payable_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_payments_on_order_id"
+    t.index ["payable_type", "payable_id"], name: "index_payments_on_payable"
+  end
+
+  create_table "paypal_payments", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "physical_products", force: :cascade do |t|
     t.string "name"
     t.decimal "price"
@@ -48,5 +66,26 @@ ActiveRecord::Schema.define(version: 2021_02_02_003554) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "stripe_payments", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "transbank_credits", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "transbank_oneclicks", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "transbank_webpays", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "order_items", "orders"
+  add_foreign_key "payments", "orders"
 end
