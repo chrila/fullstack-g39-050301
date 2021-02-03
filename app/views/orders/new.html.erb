@@ -1,0 +1,21 @@
+<%= form_with(model: @order, local: true) do |form| %>
+  <div class="field">
+    <%= form.label :number %>
+    <%= form.text_field :number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :total %>
+    <%= form.number_field :total, step: 0.1 %>
+  </div>
+
+  <%= form_with(model: @payment) do |payment_form| %>
+    <div class="field">
+      <%= payment_form.label :payable, 'Payment method' %>
+      <%= payment_form.select :payable, payment_methods_to_select %>
+    </div>
+
+    <%= payment_form.submit %>
+  <% end %>
+
+<% end %>
