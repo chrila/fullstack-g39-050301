@@ -1,8 +1,10 @@
 module OrdersHelper
 
   def payment_methods_to_select
-    ['Stripe payment', 'Paypal payment', 'Transbank credit', 'Transbank Webpay', 'Transbank Oneclick'].map do |p|
-      [p, p.gsub(' ', '_').camelcase]
+    class_names = ['StripePayment', 'PaypalPayment', 'TransbankCredit', 'TransbankWebpay', 'TransbankOneclick']
+    
+    class_names.map do |c|
+      [c.underscore.gsub('_', ' ').humanize, c]
     end
   end
 

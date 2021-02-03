@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
   def create
     methodname = params[:payable]
     payment_method = methodname.classify.safe_constantize.new
-    @order = Order.new(number: params[:number], total: params[:total])
+    @order = Order.new(number: params[:order][:number], total: params[:order][:total])
     @payment = Payment.new(order: @order, payable: payment_method)
     
     respond_to do |format|
